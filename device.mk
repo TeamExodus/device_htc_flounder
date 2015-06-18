@@ -236,6 +236,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.enable_boot_charger_mode=1
 
+# KTHNX for the release keys that don't match the vendor blobs.  I'll just fix that error message for you.
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    BUILD_FINGERPRINT="google/volantis/flounder:5.1.1/LMY47X/1849464:user/release-keys" \
+    PRIVATE_BUILD_DESC="volantis-user 5.1.1 LMY47X 1849464 release-keys"
+
 # Enable USB OTG (CAF commit to Settings)
 ADDITIONAL_BUILD_PROPERTIES += \
     persist.sys.isUsbOtgEnabled=true

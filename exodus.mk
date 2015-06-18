@@ -44,6 +44,10 @@ PRODUCT_COPY_FILES += \
 # CM Overlays
 DEVICE_PACKAGE_OVERLAYS += device/htc/flounder/overlay-cm
 
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    BUILD_FINGERPRINT="google/volantis/flounder:5.1.1/LMY47X/1849464:user/release-keys" \
+    PRIVATE_BUILD_DESC="volantis-user 5.1.1 LMY47X 1849464 release-keys"
+
 ## Device identifier. This must come after all inclusions
 PRODUCT_NAME := exodus_flounder
 PRODUCT_BRAND := google
