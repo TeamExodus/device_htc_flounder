@@ -23,7 +23,6 @@ TARGET_PREBUILT_KERNEL := device/htc/flounder-kernel/kernel
 #TARGET_KERNEL_CONFIG := flounder_defconfig
 #BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 BOARD_KERNEL_CMDLINE := androidboot.selinux=enforcing
-TARGET_PREBUILT_KERNEL := false
 
 ifneq ($(TARGET_PREBUILT_KERNEL),)
   ifneq ("$(wildcard $(TARGET_PREBUILT_KERNEL))","")
