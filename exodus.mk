@@ -16,22 +16,29 @@ $(call inherit-product, device/htc/flounder/aosp_flounder.mk)
 $(call inherit-product-if-exists, vendor/htc/flounder/device-vendor.mk)
 
 # Inline kernel building
-TARGET_PREBUILT_KERNEL := device/htc/flounder-kernel/kernel
-#KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/aarch64/aarch64-linux-android-4.8/bin
-#KERNEL_TOOLCHAIN_PREFIX := aarch64-linux-android-
-#TARGET_KERNEL_SOURCE := kernel/htc/flounder
-#TARGET_KERNEL_CONFIG := flounder_defconfig
-#BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
+#TARGET_PREBUILT_KERNEL := device/htc/flounder-kernel/kernel
+KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/aarch64/aarch64-linux-android-4.8/bin
+KERNEL_TOOLCHAIN_PREFIX := aarch64-linux-android-
+TARGET_KERNEL_SOURCE := kernel/htc/flounder
+TARGET_KERNEL_CONFIG := flounder_defconfig
+BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 BOARD_KERNEL_CMDLINE := androidboot.selinux=enforcing
+TARGET_PREBUILT_KERNEL := false
 
 ifneq ($(TARGET_PREBUILT_KERNEL),)
   ifneq ("$(wildcard $(TARGET_PREBUILT_KERNEL))","")
     PRODUCT_COPY_FILES += \
       $(TARGET_PREBUILT_KERNEL):$(ANDROID_BUILD_TOP)/out/target/product/$(TARGET_DEVICE)/kernel
   else
-    $(error no prebuilt kernel exists on path $(TARGET_PREBUILT_KERNEL)!!)
+    ifneq ($(TARGET_PREBUILT_KERNEL),false)
+      $(error no prebuilt kernel exists on path $(TARGET_PREBUILT_KERNEL)!!)
+    endif
   endif
 endif
+
+# Enable USB OTG (CAF commit to Settings)
+ADDITIONAL_BUILD_PROPERTIES += \
+    persist.sys.isUsbOtgEnabled=true
 
 # Extra Packages
 PRODUCT_PACKAGES += \

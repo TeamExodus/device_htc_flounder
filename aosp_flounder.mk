@@ -36,7 +36,9 @@ ifneq ($(TARGET_PREBUILT_KERNEL),)
     PRODUCT_COPY_FILES += \
       $(TARGET_PREBUILT_KERNEL):$(ANDROID_BUILD_TOP)/out/target/product/$(TARGET_DEVICE)/kernel
   else
-    $(error no prebuilt kernel exists on path $(TARGET_PREBUILT_KERNEL)!!)
+    ifneq ($(TARGET_PREBUILT_KERNEL),false)
+      $(error no prebuilt kernel exists on path $(TARGET_PREBUILT_KERNEL)!!)
+    endif
   endif
 endif
 
