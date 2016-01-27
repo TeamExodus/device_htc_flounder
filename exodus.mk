@@ -1,14 +1,22 @@
-# CyanogenMod Specific Changes
+# Exodus Specific Changes
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 2048
 TARGET_SCREEN_WIDTH := 1536
 
-# Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/common_full_tablet_wifionly.mk)
+ifeq ($(TARGET_SCREEN_WIDTH) $(TARGET_SCREEN_HEIGHT),$(space))
+    PRODUCT_COPY_FILES += \
+        vendor/exodus/prebuilt/common/bootanimation/800.zip:system/media/bootanimation.zip
+endif
+
+# Inherit common Exodus stuff
+$(call inherit-product, vendor/exodus/config/common_full.mk)
+
+# Inherit some common Exodus stuff.
+# $(call inherit-product, vendor/exodus/config/common_full_tablet_wifionly.mk)
 
 # Enhanced NFC
-$(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
+$(call inherit-product, vendor/exodus/config/nfc_enhanced.mk)
 
 # Inherit device configuration
 $(call inherit-product, device/htc/flounder/aosp_flounder.mk)
@@ -40,6 +48,6 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     BUILD_ID=MMB29S
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_NAME := cm_flounder
+PRODUCT_NAME := exodus_flounder
 PRODUCT_BRAND := google
 PRODUCT_MODEL := Nexus 9
