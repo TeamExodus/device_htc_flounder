@@ -1,7 +1,6 @@
-
 [
   {
-    "repository": "Exodus-Kernels/htc_flounder",
+    "repository": "TeamExodus/kernel_htc_flounder",
     "target_path": "kernel/htc/flounder"
   }
 ]
